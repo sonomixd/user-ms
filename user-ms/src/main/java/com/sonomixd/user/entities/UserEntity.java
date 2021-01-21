@@ -1,21 +1,39 @@
-package com.sonomixd.user.dto;
+package com.sonomixd.user.entities;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
-public class UserDto implements Serializable {
-    private static final long serialVersionUID = 5207385959851107261L;
+@Entity
+@Table(name = "users")
+public class UserEntity implements Serializable {
+    private static final long serialVersionUID = 3092655802733480870L;
 
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @Column(name = "user_id", nullable = false, unique = true)
     private String userId;
 
+    @Column(name = "first_name", nullable = false, length = 50)
     private String firstName;
 
+    @Column(name = "last_name", nullable = false, length = 50)
     private String lastName;
 
-    private String password;
-
+    @Column(name = "email", nullable = false, length = 50, unique = true)
     private String email;
 
+    @Column(name = "encrypted_password", nullable = false, unique = true)
     private String encryptedPassword;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getUserId() {
         return userId;
@@ -39,14 +57,6 @@ public class UserDto implements Serializable {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getEmail() {
